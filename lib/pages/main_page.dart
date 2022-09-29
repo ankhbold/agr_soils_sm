@@ -44,7 +44,6 @@ class _MainPageState extends State<MainPage>{
   @override
   Widget build(BuildContext context) {
     return new FlutterMap(
-
       options: MapOptions(
         center: LatLng(50.093057, 105.715020),
         zoom: 9.2,
