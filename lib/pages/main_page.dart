@@ -7,13 +7,26 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geocode/geocode.dart';
-import 'package:latlong/latlong.dart';
+import 'package:flutter_map/src/geo/crs/crs.dart';
+import 'package:flutter_map/src/map/flutter_map_state.dart';
+import 'package:flutter_map/src/map/map.dart';
+// import 'package:flutter_map/src/plugins/plugin.dart';
+// import 'package:latlong/latlong.dart';
+import 'package:latlong2/latlong.dart';
 
-import 'forgot_password_page.dart';
-import 'forgot_password_verification_page.dart';
-import 'login_page.dart';
-import 'registration_page.dart';
+export 'src/core/point.dart';
+export 'src/geo/crs/crs.dart';
+export 'src/geo/latlng_bounds.dart';
+export 'src/layer/circle_layer.dart';
+export 'src/layer/group_layer.dart';
+export 'src/layer/layer.dart';
+export 'src/layer/marker_layer.dart';
+export 'src/layer/mbtiles/mbtiles_image_provider.dart';
+export 'src/layer/overlay_image_layer.dart';
+export 'src/layer/polygon_layer.dart';
+export 'src/layer/polyline_layer.dart';
+export 'src/layer/tile_layer.dart';
+export 'src/plugins/plugin.dart';
 
 class MainPage extends StatefulWidget{
 
@@ -30,95 +43,26 @@ class _MainPageState extends State<MainPage>{
 
   @override
   Widget build(BuildContext context) {
-    var point = 0;
-    return Stack(
+    return new FlutterMap(
 
-      children: [
-        FlutterMap(
-          options: MapOptions(
-            onTap: (p) async {
-              setState(() {
-                var point = p;
-                print(p);
-              });
-              // location = await Geocode.local.findAddressesFromCoordinates(
-              //     new Coordinates(p.latitude, p.longitude));
-              //
-              // setState(() {
-              //   point = p;
-              //   print(p);
-              // });
-              //
-              // print(
-              //     "${location.first.countryName} - ${location.first.featureName}");
-              GeoCode geoCode = GeoCode();
-
-              try {
-                Coordinates coordinates = await geoCode.forwardGeocoding(
-                    address: "532 S Olive St, Los Angeles, CA 90013");
-
-                print("Latitude: ${coordinates.latitude}");
-                print("Longitude: ${coordinates.longitude}");
-              } catch (e) {
-                print(e);
-              }
-
-            },
-            center: LatLng(49.5, -0.09),
-            zoom: 5.0,
-          ),
-          layers: [
-            TileLayerOptions(
-                urlTemplate:
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c']),
-            MarkerLayerOptions(
-              markers: [
-                Marker(
-                  width: 80.0,
-                  height: 80.0,
-                  point: point,
-                  builder: (ctx) => Container(
-                    child: Icon(
-                      Icons.location_on,
-                      color: Colors.red,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ],
+      options: MapOptions(
+        center: LatLng(50.093057, 105.715020),
+        zoom: 9.2,
+      ),
+      nonRotatedChildren: [
+        AttributionWidget.defaultWidget(
+          source: 'OpenStreetMap contributors',
+          onSourceTapped: null,
         ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 34.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Card(
-                child: TextField(
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.all(16.0),
-                    hintText: "Search for your localisation",
-                    prefixIcon: Icon(Icons.location_on_outlined),
-                  ),
-                ),
-              ),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Text(
-                          "${location.first.countryName},${location.first.locality}, ${location.first.featureName}"),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+      ],
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'com.example.app',
         ),
       ],
     );
+
   }
 
 }
