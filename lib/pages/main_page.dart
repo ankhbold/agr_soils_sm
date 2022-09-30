@@ -40,28 +40,83 @@ class _MainPageState extends State<MainPage>{
 
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
-
   @override
   Widget build(BuildContext context) {
-    return new FlutterMap(
-      options: MapOptions(
-        center: LatLng(50.093057, 105.715020),
-        zoom: 9.2,
-      ),
-      nonRotatedChildren: [
-        AttributionWidget.defaultWidget(
-          source: 'OpenStreetMap contributors',
-          onSourceTapped: null,
-        ),
-      ],
-      children: [
-        TileLayer(
-          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          userAgentPackageName: 'com.example.app',
-        ),
-      ],
+
+    return Scaffold(
+
+      backgroundColor: Color.fromRGBO(28, 35, 38, 100),
+      body: _buildMap(),
+      appBar: _buildAppBar(context),
+
     );
-
   }
-
 }
+
+AppBar _buildAppBar(context) {
+  return AppBar(
+
+    backgroundColor: Colors.white,
+    title: Text(
+      "Map".toUpperCase(),
+      style: TextStyle(fontSize: 19.0, color: Colors.black87),
+    ),
+
+    elevation: 0.5,
+    iconTheme: IconThemeData(color: Colors.white),
+    flexibleSpace:Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
+          )
+      ),
+    ),
+
+    actions: [
+      Container(
+        margin: EdgeInsets.only( top: 16, right: 16,),
+        child: Stack(
+          children: <Widget>[
+            Icon(Icons.notifications),
+            Positioned(
+              right: 0,
+              child: Container(
+                padding: EdgeInsets.all(1),
+                decoration: BoxDecoration( color: Colors.red, borderRadius: BorderRadius.circular(6),),
+                constraints: BoxConstraints( minWidth: 12, minHeight: 12, ),
+                child: Text( '5', style: TextStyle(color: Colors.white, fontSize: 8,), textAlign: TextAlign.center,),
+              ),
+            )
+          ],
+        ),
+      )
+    ],
+    automaticallyImplyLeading: false,
+    centerTitle: true,
+  );
+}
+
+FlutterMap _buildMap() {
+  return new FlutterMap(
+
+    options: MapOptions(
+      center: LatLng(50.093057, 105.715020),
+      zoom: 9.2,
+    ),
+    nonRotatedChildren: [
+      AttributionWidget.defaultWidget(
+        source: 'OpenStreetMap contributors',
+        onSourceTapped: null,
+      ),
+    ],
+    children: [
+      TileLayer(
+        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+        userAgentPackageName: 'com.example.app',
+      ),
+    ],
+  );
+}
+
