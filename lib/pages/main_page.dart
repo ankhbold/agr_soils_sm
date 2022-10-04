@@ -4,7 +4,7 @@ import 'package:agr_soils/pages/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:agr_soils/common/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/src/geo/crs/crs.dart';
@@ -13,6 +13,8 @@ import 'package:flutter_map/src/map/map.dart';
 // import 'package:flutter_map/src/plugins/plugin.dart';
 // import 'package:latlong/latlong.dart';
 import 'package:latlong2/latlong.dart';
+import 'nav_screen.dart';
+import 'bottom_sheet.dart';
 
 export 'src/core/point.dart';
 export 'src/geo/crs/crs.dart';
@@ -27,6 +29,7 @@ export 'src/layer/polygon_layer.dart';
 export 'src/layer/polyline_layer.dart';
 export 'src/layer/tile_layer.dart';
 export 'src/plugins/plugin.dart';
+
 
 class MainPage extends StatefulWidget{
 
@@ -48,8 +51,53 @@ class _MainPageState extends State<MainPage>{
       backgroundColor: Color.fromRGBO(28, 35, 38, 100),
       body: _buildMap(),
       appBar: _buildAppBar(context),
+      // bottomNavigationBar: MyHomePage(),
+      bottomNavigationBar: _showBottomNav(),
+
 
     );
+  }
+  int _selectedIndex = 0;
+  Widget _showBottomNav()
+  {
+    return BottomNavigationBar(
+      items: [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.leak_add_sharp),
+          label: 'Fields',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.auto_awesome_motion_outlined),
+          label: 'Notes',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add_circle_sharp),
+          label: 'Add',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.assignment_rounded),
+          label: 'Insight',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: 'Profile',
+        ),
+
+
+
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: Colors.green,
+      unselectedItemColor: Colors.grey,
+      onTap: _onTap,
+    );
+  }
+  void _onTap(int index)
+  {
+    _selectedIndex = index;
+    setState(() {
+
+    });
   }
 }
 
@@ -57,10 +105,7 @@ AppBar _buildAppBar(context) {
   return AppBar(
 
     backgroundColor: Colors.white,
-    title: Text(
-      "Map".toUpperCase(),
-      style: TextStyle(fontSize: 19.0, color: Colors.black87),
-    ),
+
 
     elevation: 0.5,
     iconTheme: IconThemeData(color: Colors.white),
@@ -75,6 +120,8 @@ AppBar _buildAppBar(context) {
     ),
 
     actions: [
+
+
       Container(
         margin: EdgeInsets.only( top: 16, right: 16,),
         child: Stack(
@@ -119,4 +166,5 @@ FlutterMap _buildMap() {
     ],
   );
 }
+
 
