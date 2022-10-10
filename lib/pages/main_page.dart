@@ -1,4 +1,3 @@
-
 import 'package:agr_soils/pages/splash_screen.dart';
 import 'package:agr_soils/pages/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,45 +29,60 @@ export 'src/layer/polyline_layer.dart';
 export 'src/layer/tile_layer.dart';
 export 'src/plugins/plugin.dart';
 
-
-class MainPage extends StatefulWidget{
-
+class MainPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-     return _MainPageState();
+    return _MainPageState();
   }
 }
 
-class _MainPageState extends State<MainPage>{
-
-  double  _drawerIconSize = 24;
+class _MainPageState extends State<MainPage> {
+  double _drawerIconSize = 24;
   double _drawerFontSize = 17;
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    Widget child = Container();
+    const TextStyle optionStyle =
+    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+    switch (_selectedIndex) {
+      case 0:
+        child = _buildMap();
+        break;
+      case 1:
+        child = Text('Index 1: Home', style: optionStyle,);
+        break;
+      case 2:
+        child = Text('Index 2: Home', style: optionStyle,);
+        break;
+      case 3:
+        child = Text('Index 3: Home', style: optionStyle,);
+        break;
+      case 4:
+        child = Text('Index 4: Home', style: optionStyle,);
+        break;
+    }
 
     return Scaffold(
-
       backgroundColor: Color.fromRGBO(28, 35, 38, 100),
-      body: _buildMap(),
+      body: SizedBox.expand(child: child),
       appBar: _buildAppBar(context),
       // bottomNavigationBar: MyHomePage(),
       bottomNavigationBar: _showBottomNav(),
-
-
     );
   }
-  int _selectedIndex = 0;
-  Widget _showBottomNav()
-  {
+
+  Widget _showBottomNav() {
     return BottomNavigationBar(
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.leak_add_sharp),
-          label: 'Fields',
+          label: 'Талбай',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.auto_awesome_motion_outlined),
-          label: 'Notes',
+          label: 'Тэмдэглэл',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.add_circle_sharp),
@@ -80,11 +94,8 @@ class _MainPageState extends State<MainPage>{
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
-          label: 'Profile',
+          label: 'Профайл',
         ),
-
-
-
       ],
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.green,
@@ -92,38 +103,34 @@ class _MainPageState extends State<MainPage>{
       onTap: _onTap,
     );
   }
-  void _onTap(int index)
-  {
-    _selectedIndex = index;
-    setState(() {
 
-    });
+  void _onTap(int index) {
+    _selectedIndex = index;
+    setState(() {});
   }
 }
 
 AppBar _buildAppBar(context) {
   return AppBar(
-
     backgroundColor: Colors.white,
-
-
     elevation: 0.5,
     iconTheme: IconThemeData(color: Colors.white),
-    flexibleSpace:Container(
+    flexibleSpace: Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).accentColor,]
-          )
-      ),
+              colors: <Color>[
+            Theme.of(context).primaryColor,
+            Theme.of(context).accentColor,
+          ])),
     ),
-
     actions: [
-
-
       Container(
-        margin: EdgeInsets.only( top: 16, right: 16,),
+        margin: EdgeInsets.only(
+          top: 16,
+          right: 16,
+        ),
         child: Stack(
           children: <Widget>[
             Icon(Icons.notifications),
@@ -131,9 +138,22 @@ AppBar _buildAppBar(context) {
               right: 0,
               child: Container(
                 padding: EdgeInsets.all(1),
-                decoration: BoxDecoration( color: Colors.red, borderRadius: BorderRadius.circular(6),),
-                constraints: BoxConstraints( minWidth: 12, minHeight: 12, ),
-                child: Text( '5', style: TextStyle(color: Colors.white, fontSize: 8,), textAlign: TextAlign.center,),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                constraints: BoxConstraints(
+                  minWidth: 12,
+                  minHeight: 12,
+                ),
+                child: Text(
+                  '5',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 8,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ),
             )
           ],
@@ -147,7 +167,6 @@ AppBar _buildAppBar(context) {
 
 FlutterMap _buildMap() {
   return new FlutterMap(
-
     options: MapOptions(
       center: LatLng(50.093057, 105.715020),
       zoom: 9.2,
@@ -166,5 +185,3 @@ FlutterMap _buildMap() {
     ],
   );
 }
-
-
