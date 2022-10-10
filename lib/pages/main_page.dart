@@ -28,6 +28,7 @@ export 'src/layer/polygon_layer.dart';
 export 'src/layer/polyline_layer.dart';
 export 'src/layer/tile_layer.dart';
 export 'src/plugins/plugin.dart';
+import 'profile_page.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -45,22 +46,32 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     Widget child = Container();
     const TextStyle optionStyle =
-    TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+        TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
     switch (_selectedIndex) {
       case 0:
         child = _buildMap();
         break;
       case 1:
-        child = Text('Index 1: Home', style: optionStyle,);
+        child = Text(
+          'Index 1: Home',
+          style: optionStyle,
+        );
         break;
       case 2:
-        child = Text('Index 2: Home', style: optionStyle,);
+        child = Text(
+          'Index 2: Home',
+          style: optionStyle,
+        );
         break;
       case 3:
-        child = Text('Index 3: Home', style: optionStyle,);
+        child = Text(
+          'Index 3: Home',
+          style: optionStyle,
+        );
         break;
       case 4:
-        child = Text('Index 4: Home', style: optionStyle,);
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ProfilePage()));
         break;
     }
 
