@@ -122,6 +122,7 @@ class _MainPageState extends State<MainPage> {
 }
 
 AppBar _buildAppBar(context) {
+  
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0.5,
@@ -137,34 +138,55 @@ AppBar _buildAppBar(context) {
           ])),
     ),
     actions: [
+   Container(
+        margin: EdgeInsets.only( top: 16, right: 16,),
+       child: Container(
+        height: 40,
+        padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(32.0),
+            border: Border.all()),
+      ),
+   ),
       Container(
-        margin: EdgeInsets.only(
-          top: 16,
-          right: 16,
-        ),
+        margin: EdgeInsets.only( top: 16, left: 16,),
         child: Stack(
           children: <Widget>[
-            Icon(Icons.notifications),
+           new IconButton(
+            icon: new Icon(
+              Icons.arrow_downward_outlined,
+            ),
+            onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.amber,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Text('Modal BottomSheet'),
+                      ElevatedButton(
+                        child: const Text('Close BottomSheet'),
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+          ),
             Positioned(
               right: 0,
-              child: Container(
+              child: 
+              Container(
                 padding: EdgeInsets.all(1),
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                constraints: BoxConstraints(
-                  minWidth: 12,
-                  minHeight: 12,
-                ),
-                child: Text(
-                  '5',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 8,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+                child: Text( '5', style: TextStyle(color: Colors.white, fontSize: 8,), textAlign: TextAlign.center,),
               ),
             )
           ],
