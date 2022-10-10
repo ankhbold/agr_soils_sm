@@ -1,3 +1,4 @@
+import 'package:agr_soils/pages/home_page.dart';
 import 'package:agr_soils/pages/splash_screen.dart';
 import 'package:agr_soils/pages/widgets/header_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_map/src/map/map.dart';
 // import 'package:flutter_map/src/plugins/plugin.dart';
 // import 'package:latlong/latlong.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'nav_screen.dart';
 import 'bottom_sheet.dart';
 
@@ -31,6 +33,9 @@ export 'src/plugins/plugin.dart';
 import 'profile_page.dart';
 
 class MainPage extends StatefulWidget {
+
+  static final String title = 'Sliding Up Panel';
+
   @override
   State<StatefulWidget> createState() {
     return _MainPageState();
@@ -38,24 +43,29 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+
   double _drawerIconSize = 24;
   double _drawerFontSize = 17;
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    BorderRadiusGeometry radius = BorderRadius.only(
+      topLeft: Radius.circular(24.0),
+      topRight: Radius.circular(24.0),
+    );
+
     Widget child = Container();
     const TextStyle optionStyle =
         TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
     switch (_selectedIndex) {
       case 0:
         child = _buildMap();
+
         break;
       case 1:
-        child = Text(
-          'Index 1: Home',
-          style: optionStyle,
-        );
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
         break;
       case 2:
         child = Text(
@@ -64,9 +74,29 @@ class _MainPageState extends State<MainPage> {
         );
         break;
       case 3:
-        child = Text(
-          'Index 3: Home',
-          style: optionStyle,
+        SlidingUpPanel(
+          panel: Center(
+            child: Text("This is the sliding Widget"),
+          ),
+          collapsed: Container(
+            decoration: BoxDecoration(
+                color: Colors.blueGrey,
+                // changing radius that we define above
+                borderRadius:  radius
+            ),
+            // collapsed text
+            child: Center(
+              child: Text(
+                "This is the collapsed Widget",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          // main body or content behind the panel
+          body: Center(
+            child: Text("This is the Widget behind the sliding panel"),
+          ),
+          borderRadius: radius,
         );
         break;
       case 4:
@@ -78,7 +108,9 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(28, 35, 38, 100),
       body: SizedBox.expand(child: child),
+
       appBar: _buildAppBar(context),
+
       // bottomNavigationBar: MyHomePage(),
       bottomNavigationBar: _showBottomNav(),
     );

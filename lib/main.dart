@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'pages/splash_screen.dart';
+import '../widget/maps_widget.dart';
+import '../widget/panel_widget.dart';
+import 'pages/home_page.dart';
 
 void main() {
   runApp(LoginUiApp());
 }
 
 class LoginUiApp extends StatelessWidget {
+
 
   Color _primaryColor = HexColor('#0f766e');
   Color _accentColor = HexColor('#0f766e');

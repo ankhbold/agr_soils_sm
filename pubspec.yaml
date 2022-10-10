@@ -39,11 +39,13 @@ dependencies:
   hexcolor: ^2.0.4
   font_awesome_flutter: ^9.1.0
   otp_text_field: ^1.1.1
+  google_maps_flutter: ^2.0.4
   flutter_map: ^3.0.0
 #  latlong: ^0.6.1
   logging: ^0.11.4
   validate: ^1.7.0
   latlong: ^0.6.1
+  sliding_up_panel: ^2.0.0+1
   # google_maps_flutter: ^2.2.1
 #  flutter_osm_plugin: ^0.40.3
   # flutter_map: any
