@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: ClipOval(
                 // child: Icon(Icons.android_outlined, size: 128,), //put your logo here
                 //   child: Image(image: AssetImage('assets/images/agr_logo.png')),
-                child: Image(image: AssetImage('/images/agr_logo.png')),
+                child: Image(image: AssetImage('assets/images/agr_logo.png')),
               ),
             ),
             decoration: BoxDecoration(
