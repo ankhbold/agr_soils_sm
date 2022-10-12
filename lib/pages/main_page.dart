@@ -13,7 +13,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int index_color = 0;
-  List Screen = [Home(), Statistics(), Home(), Statistics()];
+  List Screen = [HomePage(), Statistics(), HomePage(), Statistics()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

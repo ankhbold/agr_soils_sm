@@ -47,6 +47,9 @@ dependencies:
   validate: ^1.7.0
   latlong: ^0.6.1
   sliding_up_panel: ^2.0.0+1
+  path_provider: ^2.0.11
+  sqflite: ^2.1.0+1
+  cached_network_image: ^3.2.2
   # google_maps_flutter: ^2.2.1
 #  flutter_osm_plugin: ^0.40.3
   # flutter_map: any
