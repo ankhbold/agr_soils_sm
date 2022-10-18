@@ -81,18 +81,18 @@ class _HomePage extends State<HomePage> {
                       SizedBox(
                         height: 20.0,
                       ),
-                          TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0Xff302360),
-                          border:OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                            borderSide: BorderSide.none,
-                            ),
-                            hintText: "Search field",
-                            prefixIcon: Icon(Icons.search),
-                        ),
-                      ),
+                      //     TextField(
+                      //   decoration: InputDecoration(
+                      //     filled: true,
+                      //     fillColor: Color(0Xff302360),
+                      //     border:OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(8.0),
+                      //       borderSide: BorderSide.none,
+                      //       ),
+                      //       hintText: "Search field",
+                      //       prefixIcon: Icon(Icons.search),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

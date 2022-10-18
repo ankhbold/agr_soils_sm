@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import '../Screens/home.dart';
 import '../Screens/statistics.dart';
+import '../pages/profile_page.dart';
+import 'package:agr_soils/domain/user.dart';
+import 'package:agr_soils/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
   static final String title = 'Sliding Up Panel';
-
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -13,9 +16,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int index_color = 0;
-  List Screen = [HomePage(), Statistics(), HomePage(), Statistics()];
+  List Screen = [HomePage(), Statistics(), HomePage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
+    print('dddddd000000');
+    User user = Provider.of<UserProvider>(context).user;
+    print(user.username);
+    print('user.username');
+
     return Scaffold(
       body: Screen[index_color],
       floatingActionButton: FloatingActionButton(
